@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [title, setTitle] = useState("");
@@ -98,8 +99,8 @@ const Home = () => {
           >
             <p>Title: {blog.title}</p>
             <p>Blog message: {blog.description}</p>
-
-            {console.log(blog)}
+            <Link to={`/home/${blog._id}`}>Edit</Link>
+            {/* {console.log(blog)} */}
           </div>
         ))}
       </div>

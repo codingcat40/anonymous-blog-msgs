@@ -45,11 +45,33 @@ app.post('/home', (req, res) => {
     }).catch(err => res.json(err))
 })
 
-// get blogs
-app.get('/getPosts', (req,res) => {
-    BlogModel.find().then((blogs) => res.json(blogs))
+// retrieve blogs
+app.get('/getPosts', async (req,res) => {
+    const BlogData = await BlogModel.find()
+
+    if(!BlogData){
+        return res.status(404).json({message:  'There is No Blogs to display'})
+    }
+    BlogData.then((blogs) => res.json(blogs))
     .catch((err) => res.json(err))
 })
+
+
+// read a blog
+app.get('/:id', async (req, res) => {
+    const {id} = req.params
+
+    try{
+        const blog = await BlogModel.findById(id)
+        if(!blog){
+            return res.status(404).json({message: 'Blog not found'})
+        }
+        res.json(blog)
+    }catch(err){
+        res.status(400).json({message: 'Invalid Blog ID'})
+    }
+})
+
 
 const PORT = 3000
 app.listen(PORT, () =>  {
