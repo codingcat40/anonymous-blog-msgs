@@ -11,6 +11,10 @@ const Home = () => {
       description: "",
     },
   ]);
+
+  const [createBlog, setCreateBlog] = useState(false);
+  const [refreshBlog, setRefreshBlog] = useState(false);
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/getPosts")
@@ -18,9 +22,7 @@ const Home = () => {
         setBlogs(blogs.data), console.log(blogs.data);
       })
       .catch((err) => console.log(err));
-  }, []);
-
-  const [createBlog, setCreateBlog] = useState(false);
+  }, [refreshBlog]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,8 +33,9 @@ const Home = () => {
       })
       .then((result) => {
         console.log(result);
+        setRefreshBlog(!refreshBlog);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
   };
 
   return (
@@ -86,15 +89,19 @@ const Home = () => {
             </form>
           </div>
         )}
-        <div className="border min-h-screen mt-14 text-2xl text-black">
-          {blogs.map((blog, index) => (
-            <div key={index} className="border bg-white">
-              Title: {blog.title}
-              Desc: {blog.description}
-              {console.log(blog)}
-            </div>
-          ))}
-        </div>
+      </div>
+      <div className="mt-14 text-black grid grid-cols-3">
+        {blogs.map((blog, index) => (
+          <div
+            key={index}
+            className="m-4 min-h-fit h-64 flex flex-col bg-white w-104"
+          >
+            <p>Title: {blog.title}</p>
+            <p>Blog message: {blog.description}</p>
+
+            {console.log(blog)}
+          </div>
+        ))}
       </div>
     </div>
   );
