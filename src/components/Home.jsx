@@ -1,17 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Home = () => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
   const [blogs, setBlogs] = useState([
     {
       title: "",
       description: "",
-      createdAt: "",
     },
   ]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/getPosts")
+      .then((blogs) => {
+        setBlogs(blogs.data), console.log(blogs.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const [createBlog, setCreateBlog] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios
+      .post("http://localhost:3000/home", {
+        title,
+        description,
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -42,8 +63,10 @@ const Home = () => {
                 <label htmlFor="">Title</label>
                 <input
                   type="text"
+                  name="title"
                   placeholder="Enter there"
                   className="mx-8 mt-4"
+                  onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
 
@@ -51,8 +74,10 @@ const Home = () => {
                 <label htmlFor="">Blog Message</label>
                 <textarea
                   type="text"
+                  name="description"
                   placeholder="Enter Your blog here..."
                   className="mx-8 mt-4"
+                  onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
               <button className="bg-blue-300 w-24 mx-auto rounded-2xl p-2 hover:bg-blue-700">
@@ -61,9 +86,16 @@ const Home = () => {
             </form>
           </div>
         )}
+        <div className="border min-h-screen mt-14 text-2xl text-black">
+          {blogs.map((blog, index) => (
+            <div key={index} className="border bg-white">
+              Title: {blog.title}
+              Desc: {blog.description}
+              {console.log(blog)}
+            </div>
+          ))}
+        </div>
       </div>
-
-      <div className="flex flex-col">{}</div>
     </div>
   );
 };
