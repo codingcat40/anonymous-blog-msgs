@@ -20,8 +20,8 @@ const Login = () => {
         if (res.data === "Success") {
           navigate("/home");
         } else {
-          alert("No registered user found");
-          navigate("/register");
+          alert("Please Check your email/password ");
+          navigate("/");
         }
       })
       .catch((err) => {
@@ -80,7 +80,7 @@ const Login = () => {
               Don't have an account?{" "}
             </p>
             <Link
-              to="/register"
+              to="/"
               className=" bg-blue-500 mt-8 hover:bg-blue-600 text-white font-semibold p-2 rounded-lg"
             >
               Register

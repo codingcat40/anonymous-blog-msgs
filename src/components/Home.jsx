@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+
 const Home = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -41,7 +42,10 @@ const Home = () => {
 
   return (
     <div className="bg-amber-50 min-h-screen">
+      <div className="flex flex-row">
       <h2 className="mx-auto text-center text-2xl">Community Small Blogs</h2>
+      <Link to='/'className='text-xl bg-red-400 hover:bg-red-600 m-2 p-2 rounded-xl'>Logout</Link>
+      </div>
       <div className="text-center mx-auto">
         <button
           onClick={() => setCreateBlog(true)}
