@@ -95,9 +95,9 @@ const Home = () => {
         {blogs.map((blog, index) => (
           <div
             key={index}
-            className="m-4 min-h-fit shadow-md  h-64 flex flex-col bg-white w-104 justify-center text-center"
+            className="m-4 p-4 min-h-fit shadow-md rounded-xl h-64 flex flex-col bg-gray-100 w-104 justify-center text-center"
           >
-            <p className="text-2xl">Blog Title: {blog.title}</p>
+            <p className="truncate text-2xl">Blog Title: <span className="text-[18px]">{blog.title}</span></p>
             <p className="truncate text-lg">Blog Description: {blog.description}</p>
             <Link
               to={`/home/${blog._id}`}

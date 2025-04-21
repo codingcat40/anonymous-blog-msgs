@@ -68,6 +68,21 @@ app.get("/home/:id", async (req, res) => {
   }
 });
 
+
+// Delete a blog
+app.delete('/home/:id', (req, res)  => {
+    const {id} = req.params;
+
+    try{
+        BlogModel.findByIdAndDelete(id).then(() =>  {
+            res.sendStatus(200)
+        })
+    }catch(err){
+        console.log(err)
+        res.sendStatus(500)
+}}
+)
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log("Server is running");
