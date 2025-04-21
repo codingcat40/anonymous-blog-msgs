@@ -36,11 +36,11 @@ const Home = () => {
         console.log(result);
         setRefreshBlog(!refreshBlog);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   };
 
   return (
-    <div className="bg-red-50 min-h-screen">
+    <div className="bg-amber-50 min-h-screen">
       <h2 className="mx-auto text-center text-2xl">Community Small Blogs</h2>
       <div className="text-center mx-auto">
         <button
@@ -91,15 +91,20 @@ const Home = () => {
           </div>
         )}
       </div>
-      <div className="mt-14 text-black grid grid-cols-3">
+      <div className="text-black grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14">
         {blogs.map((blog, index) => (
           <div
             key={index}
-            className="m-4 min-h-fit h-64 flex flex-col bg-white w-104"
+            className="m-4 min-h-fit shadow-md  h-64 flex flex-col bg-white w-104 justify-center text-center"
           >
-            <p>Title: {blog.title}</p>
-            <p>Blog message: {blog.description}</p>
-            <Link to={`/home/${blog._id}`}>Edit</Link>
+            <p className="text-2xl">Blog Title: {blog.title}</p>
+            <p className="truncate text-lg">Blog Description: {blog.description}</p>
+            <Link
+              to={`/home/${blog._id}`}
+              className="bg-blue-500 mt-12 hover:bg-blue-800 w-24  h-12 p-2 border rounded-lg text-white mx-auto text-center justify-center"
+            >
+              Edit
+            </Link>
             {/* {console.log(blog)} */}
           </div>
         ))}

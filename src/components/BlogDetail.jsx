@@ -22,11 +22,14 @@ useEffect(() => {
 
 
   return (
-    <div className='text-center mx-auto justify-center bg-yellow-300 '>
-        <p className='text-3xl'>Blog Title: {blog.title}</p>
-        <p className='text-xl'>Blog message: {blog.description}</p>
-
-    </div>
+    <div className="max-w-3xl mx-auto mt-24 bg-amber-50 rounded-2xl shadow-md p-10">
+  <h1 className="text-3xl font-semibold text-center mb-6">
+    <span className="text-gray-800">Blog Title:</span> {blog.title}
+  </h1>
+  <p className="text-lg text-gray-700 leading-relaxed text-center">
+    <span className="font-medium">Blog Message:</span> {blog.description}
+  </p>
+</div>
   )
 }
 
