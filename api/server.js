@@ -87,6 +87,7 @@ app.delete('/home/:id', async (req, res)  => {
         return res.status(404).json({message:  'POst not found'})
       }
       if(blog.email!==email){
+        console.log(email)
         return res.status(403).json({message: 'Unauthorized'})
       }
         await BlogModel.findByIdAndDelete(id).then(() =>  {

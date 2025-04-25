@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const loggedInUserEmail = sessionStorage.getItem("LoggedInUserEmail")
+  const loggedInUserEmail = sessionStorage.getItem("LoggedInEmail")
 
   const [blogs, setBlogs] = useState([
     {
