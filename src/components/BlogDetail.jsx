@@ -5,10 +5,15 @@ import { useNavigate } from "react-router-dom";
 const BlogDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate() 
+  const loggedInEmail = sessionStorage.getItem("LoggedInEmail")
   const handleDelete = async ()  =>  {
     try {
         navigate('/home')
-        await axios.delete(`http://localhost:3000/home/${id}`)
+        await axios.delete(`http://localhost:3000/home/${id}`, {
+          data: {
+            email: loggedInEmail
+          }
+        })
         console.log('Blog deleted')
         
     } catch (err) {

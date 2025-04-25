@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const loggedInUserEmail = sessionStorage.getItem("LoggedInUserEmail")
 
   const [blogs, setBlogs] = useState([
     {
@@ -32,6 +33,7 @@ const Home = () => {
       .post("http://localhost:3000/home", {
         title,
         description,
+        email:  loggedInUserEmail
       })
       .then((result) => {
         console.log(result);

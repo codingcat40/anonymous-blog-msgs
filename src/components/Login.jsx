@@ -18,6 +18,7 @@ const Login = () => {
       .then((res) => {
         console.log(res);
         if (res.data === "Success") {
+          sessionStorage.setItem("LoggedInEmail",email)
           navigate("/home");
         } else {
           alert("Please Check your email/password ");

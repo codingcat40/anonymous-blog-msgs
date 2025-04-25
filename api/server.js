@@ -38,12 +38,18 @@ app.post("/register", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-app.post("/home", (req, res) => {
-  BlogModel.create(req.body)
-    .then((blogs) => {
-      res.json(blogs);
-    })
-    .catch((err) => res.json(err));
+app.post("/home", async (req, res) => {
+  const {title, description, email} = req.body
+
+  try{
+    const newPost = await BlogModel.create({title, description, email})
+    res.status(201).json(newPost)
+
+  }catch(err){
+    res.json(err)
+    console.log(err)
+  }
+  
 });
 
 // retrieve blogs
@@ -70,11 +76,20 @@ app.get("/home/:id", async (req, res) => {
 
 
 // Delete a blog
-app.delete('/home/:id', (req, res)  => {
+// Now I only wanna able to delete a blog with the logged in user email
+app.delete('/home/:id', async (req, res)  => {
     const {id} = req.params;
+    const {email} = req.body
 
     try{
-        BlogModel.findByIdAndDelete(id).then(() =>  {
+      const blog = await BlogModel.findById(id)
+      if(!blog){
+        return res.status(404).json({message:  'POst not found'})
+      }
+      if(blog.email!==email){
+        return res.status(403).json({message: 'Unauthorized'})
+      }
+        await BlogModel.findByIdAndDelete(id).then(() =>  {
             res.sendStatus(200)
         })
     }catch(err){
