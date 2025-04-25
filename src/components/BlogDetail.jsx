@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import DeleteConfirm from "../assets/DeleteConfirm";
 const BlogDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate() 
   const loggedInEmail = sessionStorage.getItem("LoggedInEmail")
+
+  // Delete confirm modal
+  const [showModal, setShowModal] = useState(false)
+
   const handleDelete = async ()  =>  {
     try {
         navigate('/home')
@@ -62,11 +67,21 @@ const BlogDetail = () => {
           Go back
         </Link>
 
-        <button className="bg-red-600 text-white text-center ml-24 justify-center mx-auto p-2 rounded-2xl"
-        onClick={handleDelete}
+        <button className="bg-red-500 hover:bg-red-600 cursor-pointer text-white text-center ml-24 justify-center mx-auto p-2 rounded-2xl"
+        onClick={() =>  setShowModal(true)}
         >
-            Delete Blog
+          Delete
         </button>
+        {
+          showModal &&  <DeleteConfirm onConfirm={
+            ()=>{
+              handleDelete()
+              setShowModal(false)
+            }
+          }
+          onCancel={() => setShowModal(false)}
+          />
+        }
         </div>
       </div>
     </div>
