@@ -45,7 +45,7 @@ const Home = () => {
   return (
     <div className="bg-amber-50 min-h-screen">
       <div className="flex flex-row">
-      <h2 className="mx-auto text-center text-2xl">Community Small Blogs</h2>
+      <h2 className="mx-auto text-center text-2xl">Community Individual Thoughts</h2>
       <Link to='/'className='text-xl bg-red-400 hover:bg-red-600 m-2 p-2 rounded-xl'>Logout</Link>
       </div>
       <div className="text-center mx-auto">
@@ -53,11 +53,11 @@ const Home = () => {
           onClick={() => setCreateBlog(true)}
           className="bg-black text-white  w-24 mt-24 py-4 rounded-2xl cursor-pointer hover:bg-amber-950"
         >
-          Create Blog
+          Create Post
         </button>
 
         <button
-          className="ml-4 bg-white p-2 rounded-4xl cursor-pointer"
+          className="ml-4 bg-gray-200 hover:bg-gray-300 rounded-4xl cursor-pointer p-4"
           onClick={() => setCreateBlog(false)}
         >
           Cancel
@@ -70,27 +70,29 @@ const Home = () => {
               className="space-y-8 flex flex-col"
             >
               <div className="mb-8 flex flex-col">
-                <label htmlFor="">Title</label>
+                <label htmlFor="" className="text-lg">Title <span className="text-xs font-thin">required</span></label>
                 <input
                   type="text"
                   name="title"
-                  placeholder="Enter there"
+                  required
+                  placeholder="Enter title here..."
                   className="mx-8 mt-4"
                   onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
 
               <div className="mb-8 flex flex-col">
-                <label htmlFor="">Blog Message</label>
+              <label htmlFor="" className="text-lg">Post Message <span className="text-xs font-thin">required</span></label>
                 <textarea
                   type="text"
                   name="description"
-                  placeholder="Enter Your blog here..."
+                  required
+                  placeholder="Enter Your text here..."
                   className="mx-8 mt-4"
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
-              <button className="bg-blue-300 w-24 mx-auto rounded-2xl p-2 hover:bg-blue-700">
+              <button className="bg-blue-300 w-24 mx-auto rounded-2xl p-2 cursor-pointer hover:bg-blue-500">
                 Create
               </button>
             </form>
