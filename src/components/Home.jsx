@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-
 const Home = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const loggedInUserEmail = sessionStorage.getItem("LoggedInEmail")
+  const loggedInUserEmail = sessionStorage.getItem("LoggedInEmail");
 
   const [blogs, setBlogs] = useState([
     {
@@ -33,7 +32,7 @@ const Home = () => {
       .post("http://localhost:3000/home", {
         title,
         description,
-        email:  loggedInUserEmail
+        email: loggedInUserEmail,
       })
       .then((result) => {
         console.log(result);
@@ -45,10 +44,19 @@ const Home = () => {
   return (
     <div className="bg-amber-50 min-h-screen">
       <div className="flex flex-row">
-      <h2 className="mx-auto text-center text-2xl">Community Individual Thoughts</h2>
-      <Link to='/'className='text-xl bg-red-400 hover:bg-red-600 m-2 p-2 rounded-xl'>Logout</Link>
+        <h2 className="mx-auto text-center text-2xl">
+          🧠Anonymous Community Hub
+        </h2>
+        <Link
+          to="/"
+          className="text-xl bg-red-400 hover:bg-red-600 m-2 p-2 rounded-xl"
+        >
+          Logout
+        </Link>
       </div>
       <div className="text-center mx-auto">
+      <p>Please feel free to share anything without worrying about your identity exposed :) </p>
+
         <button
           onClick={() => setCreateBlog(true)}
           className="bg-black text-white  w-24 mt-24 py-4 rounded-2xl cursor-pointer hover:bg-amber-950"
@@ -70,7 +78,9 @@ const Home = () => {
               className="space-y-8 flex flex-col"
             >
               <div className="mb-8 flex flex-col">
-                <label htmlFor="" className="text-lg">Title <span className="text-xs font-thin">required</span></label>
+                <label htmlFor="" className="text-lg">
+                  Title <span className="text-xs font-thin">required</span>
+                </label>
                 <input
                   type="text"
                   name="title"
@@ -82,7 +92,10 @@ const Home = () => {
               </div>
 
               <div className="mb-8 flex flex-col">
-              <label htmlFor="" className="text-lg">Post Message <span className="text-xs font-thin">required</span></label>
+                <label htmlFor="" className="text-lg">
+                  Post Message{" "}
+                  <span className="text-xs font-thin">required</span>
+                </label>
                 <textarea
                   type="text"
                   name="description"
@@ -105,8 +118,12 @@ const Home = () => {
             key={index}
             className="m-4 p-4 min-h-fit shadow-md rounded-xl h-64 flex flex-col bg-gray-100 w-104 justify-center text-center"
           >
-            <p className="truncate text-2xl">Post Title: <span className="text-[18px]">{blog.title}</span></p>
-            <p className="truncate text-lg">Post Description: {blog.description}</p>
+            <p className="truncate text-2xl">
+              Post Title: <span className="text-[18px]">{blog.title}</span>
+            </p>
+            <p className="truncate text-lg">
+              Post Description: {blog.description}
+            </p>
             <Link
               to={`/home/${blog._id}`}
               className="bg-blue-500 mt-12 hover:bg-blue-800 w-24  h-12 p-2 border rounded-lg text-white mx-auto text-center justify-center"
