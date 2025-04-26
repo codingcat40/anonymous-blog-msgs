@@ -5,12 +5,15 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [date, setDate] = useState("")
+
   const loggedInUserEmail = sessionStorage.getItem("LoggedInEmail");
 
   const [blogs, setBlogs] = useState([
     {
       title: "",
       description: "",
+      date: ""
     },
   ]);
 
@@ -28,14 +31,18 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newDate = new Date().toISOString()
     axios
       .post("http://localhost:3000/home", {
         title,
         description,
         email: loggedInUserEmail,
+        date,
       })
       .then((result) => {
+
         console.log(result);
+        setDate(newDate)
         setRefreshBlog(!refreshBlog);
       })
       .catch((err) => console.log(err));
@@ -123,6 +130,9 @@ const Home = () => {
             </p>
             <p className="truncate text-lg">
               Post Description: {blog.description}
+            </p>
+            <p className="text-xs">
+              Date Posted: {blog.date?.substring(0, 10)}
             </p>
             <Link
               to={`/home/${blog._id}`}

@@ -45,6 +45,7 @@ const BlogDetail = () => {
   const [blog, setBlog] = useState({
     title: "",
     description: "",
+    date: "",
   });
 
   useEffect(() => {
@@ -60,7 +61,9 @@ const BlogDetail = () => {
         <p className="text-lg text-gray-700 leading-relaxed text-center">
           <span className="font-medium">Post Message:</span> {blog.description}
         </p>
-
+        <p className="font-light text-gray-700 leading-relaxed text-center">
+          <span className="font-extralight">date:</span> {blog.date?.substring(0,10)}
+        </p>
         <div className="flex flex-row w-auto mt-12 items-center">
         <Link
           className="bg-red-300 p-2 rounded-2xl"

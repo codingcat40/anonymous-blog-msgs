@@ -39,10 +39,10 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/home", async (req, res) => {
-  const {title, description, email} = req.body
+  const {title, description, email, date} = req.body
 
   try{
-    const newPost = await BlogModel.create({title, description, email})
+    const newPost = await BlogModel.create({title, description, email, date})
     res.status(201).json(newPost)
 
   }catch(err){
