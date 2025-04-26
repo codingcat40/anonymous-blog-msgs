@@ -105,13 +105,13 @@ const Home = () => {
             key={index}
             className="m-4 p-4 min-h-fit shadow-md rounded-xl h-64 flex flex-col bg-gray-100 w-104 justify-center text-center"
           >
-            <p className="truncate text-2xl">Blog Title: <span className="text-[18px]">{blog.title}</span></p>
-            <p className="truncate text-lg">Blog Description: {blog.description}</p>
+            <p className="truncate text-2xl">Post Title: <span className="text-[18px]">{blog.title}</span></p>
+            <p className="truncate text-lg">Post Description: {blog.description}</p>
             <Link
               to={`/home/${blog._id}`}
               className="bg-blue-500 mt-12 hover:bg-blue-800 w-24  h-12 p-2 border rounded-lg text-white mx-auto text-center justify-center"
             >
-              Edit
+              View
             </Link>
             {/* {console.log(blog)} */}
           </div>

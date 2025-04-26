@@ -10,6 +10,7 @@ const BlogDetail = () => {
 
   // Delete confirm modal
   const [showModal, setShowModal] = useState(false)
+  const [ownerEmail, setOwnerEmail] = useState('');
 
   const handleDelete = async ()  =>  {
     try {
@@ -36,6 +37,7 @@ const BlogDetail = () => {
     })
     .then((data) => {
       console.log(data);
+      setOwnerEmail(data.email)
       setBlog(data);
     });
   } 
@@ -53,10 +55,10 @@ const BlogDetail = () => {
     <div className="bg-gray-100 min-h-screen flex items-center m-0">
       <div className="max-w-3xl mx-auto bg-amber-50 p-24 rounded-2xl shadow-md">
         <h1 className="text-3xl font-semibold text-center mb-6">
-          <span className="text-gray-800">Blog Title:</span> {blog.title}
+          <span className="text-gray-800">Post Title:</span> {blog.title}
         </h1>
         <p className="text-lg text-gray-700 leading-relaxed text-center">
-          <span className="font-medium">Blog Message:</span> {blog.description}
+          <span className="font-medium">Post Message:</span> {blog.description}
         </p>
 
         <div className="flex flex-row w-auto mt-12 items-center">
@@ -66,12 +68,13 @@ const BlogDetail = () => {
         >
           Go back
         </Link>
-
+        {ownerEmail === loggedInEmail &&
         <button className="bg-red-500 hover:bg-red-600 cursor-pointer text-white text-center ml-24 justify-center mx-auto p-2 rounded-2xl"
         onClick={() =>  setShowModal(true)}
         >
           Delete
         </button>
+}
         {
           showModal &&  <DeleteConfirm onConfirm={
             ()=>{
