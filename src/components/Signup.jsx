@@ -12,7 +12,7 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/register", {
+      .post("https://anonymous-blog-msgs.onrender.com/register", {
         name,
         email,
         password,

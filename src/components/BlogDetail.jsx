@@ -14,12 +14,13 @@ const BlogDetail = () => {
 
   const handleDelete = async ()  =>  {
     try {
-        navigate('/home')
-        await axios.delete(`http://localhost:3000/home/${id}`, {
+        
+        await axios.delete(`https://anonymous-blog-msgs.onrender.com/home/${id}`, {
           data: {
             email: loggedInEmail
           }
         })
+        navigate('/home')
         console.log('Blog deleted')
         
     } catch (err) {
@@ -28,7 +29,7 @@ const BlogDetail = () => {
   }
 
   const fetchBlog = async () => {
-    await fetch(`http://localhost:3000/home/${id}`)
+    await fetch(`https://anonymous-blog-msgs.onrender.com/home/${id}`)
     .then((res) => {
       if (res.status == 200) {
         console.log("data fetched");

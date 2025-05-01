@@ -22,7 +22,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/getPosts")
+      .get("https://anonymous-blog-msgs.onrender.com/getPosts")
       .then((blogs) => {
         setBlogs(blogs.data), console.log(blogs.data);
       })
@@ -31,19 +31,20 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newDate = new Date().toISOString()
+    const newDate = new Date().toISOString();
+  
     axios
-      .post("http://localhost:3000/home", {
+      .post("https://anonymous-blog-msgs.onrender.com/home", {
         title,
         description,
         email: loggedInUserEmail,
-        date,
+        date: newDate, 
       })
       .then((result) => {
-
         console.log(result);
-        setDate(newDate)
         setRefreshBlog(!refreshBlog);
+        setTitle(""); 
+        setDescription("");
       })
       .catch((err) => console.log(err));
   };

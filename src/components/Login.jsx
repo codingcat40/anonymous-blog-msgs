@@ -11,7 +11,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/login", {
+      .post("https://anonymous-blog-msgs.onrender.com/login", {
         email,
         password,
       })
