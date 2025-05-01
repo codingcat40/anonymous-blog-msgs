@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("")
-
+  
   const loggedInUserEmail = sessionStorage.getItem("LoggedInEmail");
 
   const [blogs, setBlogs] = useState([
@@ -50,103 +49,109 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-amber-50 min-h-screen">
-      <div className="flex flex-row">
-        <h2 className="mx-auto text-center text-2xl">
-          🧠Anonymous Community Hub
+    <div className="bg-amber-50 min-h-screen px-4">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row items-center justify-between py-4">
+        <h2 className="text-center text-2xl font-semibold">
+          🧠 Anonymous Community Hub
         </h2>
         <Link
           to="/"
-          className="text-xl bg-red-400 hover:bg-red-600 m-2 p-2 rounded-xl"
+          className="text-xl bg-red-400 hover:bg-red-600 mt-2 sm:mt-0 px-4 py-2 rounded-xl cursor-pointer"
         >
           Logout
         </Link>
       </div>
-      <div className="text-center mx-auto">
-      <p>Please feel free to share anything without worrying about your identity exposed :) </p>
-
-        <button
-          onClick={() => setCreateBlog(true)}
-          className="bg-black text-white  w-24 mt-24 py-4 rounded-2xl cursor-pointer hover:bg-amber-950"
-        >
-          Create Post
-        </button>
-
-        <button
-          className="ml-4 bg-gray-200 hover:bg-gray-300 rounded-4xl cursor-pointer p-4"
-          onClick={() => setCreateBlog(false)}
-        >
-          Cancel
-        </button>
+  
+      {/* Info and Buttons */}
+      <div className="text-center max-w-4xl mx-auto">
+        <p className="text-base sm:text-lg mb-6">
+          Please feel free to share anything without worrying about your identity being exposed :)
+        </p>
+  
+        <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10">
+          <button
+            onClick={() => setCreateBlog(true)}
+            className="bg-black text-white px-6 py-3 rounded-2xl hover:bg-amber-950 cursor-pointer"
+          >
+            Create Post
+          </button>
+  
+          <button
+            onClick={() => setCreateBlog(false)}
+            className="bg-gray-200 hover:bg-gray-300 px-6 py-3 rounded-2xl cursor-pointer"
+          >
+            Cancel
+          </button>
+        </div>
+  
+        {/* Create Blog Form */}
         {createBlog && (
-          <div className="mt-16 mx-auto w-120 h-72 bg-amber-50">
-            <form
-              action=""
-              onSubmit={handleSubmit}
-              className="space-y-8 flex flex-col"
-            >
-              <div className="mb-8 flex flex-col">
-                <label htmlFor="" className="text-lg">
-                  Title <span className="text-xs font-thin">required</span>
+          <div className="w-full max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-6">
+            <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
+              <div className="flex flex-col">
+                <label className="text-lg font-medium">
+                  Title <span className="text-xs font-thin">(required)</span>
                 </label>
                 <input
                   type="text"
                   name="title"
                   required
                   placeholder="Enter title here..."
-                  className="mx-8 mt-4"
+                  className="mt-2 px-4 py-2 border rounded-md"
                   onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
-
-              <div className="mb-8 flex flex-col">
-                <label htmlFor="" className="text-lg">
-                  Post Message{" "}
-                  <span className="text-xs font-thin">required</span>
+  
+              <div className="flex flex-col">
+                <label className="text-lg font-medium">
+                  Post Message <span className="text-xs font-thin">(required)</span>
                 </label>
                 <textarea
-                  type="text"
                   name="description"
                   required
-                  placeholder="Enter Your text here..."
-                  className="mx-8 mt-4"
+                  placeholder="Enter your text here..."
+                  className="mt-2 px-4 py-2 border rounded-md h-32 resize-none"
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
-              <button className="bg-blue-300 w-24 mx-auto rounded-2xl p-2 cursor-pointer hover:bg-blue-500">
+  
+              <button className="bg-blue-500 hover:bg-blue-600 text-white font-medium w-32 py-2 rounded-xl self-center cursor-pointer">
                 Create
               </button>
             </form>
           </div>
         )}
       </div>
-      <div className="text-black grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14">
+  
+      {/* Blog Grid */}
+      <div className="grid gap-8 mt-16 px-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {blogs.map((blog, index) => (
           <div
             key={index}
-            className="m-4 p-4 min-h-fit shadow-md rounded-xl h-64 flex flex-col bg-gray-100 w-104 justify-center text-center"
+            className="p-6 shadow-md rounded-xl bg-gray-100 flex flex-col justify-between h-64 text-center"
           >
-            <p className="truncate text-2xl">
-              Post Title: <span className="text-[18px]">{blog.title}</span>
+            <p className="text-xl font-semibold truncate">
+              Title: <span className="text-[17px] font-normal">{blog.title}</span>
             </p>
-            <p className="truncate text-lg">
-              Post Description: {blog.description}
+            <p className="text-lg truncate mt-2">
+              Description: {blog.description}
             </p>
-            <p className="text-xs">
-              Date Posted: {blog.date?.substring(0, 10)}
+            <p className="text-sm mt-2">
+              Date: {blog.date?.substring(0, 10)}
             </p>
             <Link
               to={`/home/${blog._id}`}
-              className="bg-blue-500 mt-12 hover:bg-blue-800 w-24  h-12 p-2 border rounded-lg text-white mx-auto text-center justify-center"
+              className="mt-6 bg-blue-500 hover:bg-blue-800 text-white py-2 px-4 rounded-lg mx-auto"
             >
               View
             </Link>
-            {/* {console.log(blog)} */}
           </div>
         ))}
       </div>
     </div>
   );
+  
 };
 
 export default Home;
